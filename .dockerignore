@@ -1,0 +1,11 @@
+.git
+entorno
+.venv
+**/__pycache__
+**/*.py[cod]
+.env
+.env.*
+**/.env
+**/.env.*
+**/staticfiles
+*.png

@@ -1,0 +1,29 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: barberia/.env
+    environment:
+      DATABASE_HOST: base_de_datos
+      DATABASE_PORT: "5432"
+    depends_on:
+      base_de_datos:
+        condition: service_healthy
+
+  base_de_datos:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:?Configura DATABASE_NAME en barberia/.env}
+      POSTGRES_USER: ${DATABASE_USER:?Configura DATABASE_USER en barberia/.env}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Configura DATABASE_PASSWORD en barberia/.env}
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

@@ -4,3 +4,6 @@ __pycache__/
 *.py[cod]
 staticfiles/
 .DS_Store
+.env.*
+!.env.example
+.venv/
