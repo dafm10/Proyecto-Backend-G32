@@ -1,0 +1,6 @@
+entorno/
+.env
+__pycache__/
+*.py[cod]
+staticfiles/
+.DS_Store
